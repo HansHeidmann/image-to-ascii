@@ -5,15 +5,19 @@
         <style>
             body {
                 font-size: 4.5;
+                background-color: black;
             }
         </style>
     </head>
 
     <script type="text/javascript">
-
+        //
+        // !!! NEED TO SERVE ON LOCALHOST TO TEST !!!
+        //
         function display() {
             let imageCanvas = document.getElementById("tempCanvas");
             let imageContext = imageCanvas.getContext("2d");
+            imageContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
 
             let img = new Image();
             img.src = "img/hans.png"; //document.getElementById("filePath")
@@ -21,8 +25,6 @@
             img.onload = function() {
                 imageContext.drawImage(img, 0, 0, 100, 100);
                 imageData = imageContext.getImageData(0, 0, 100, 100);
-                //img.display.style = "none";
-
 
                 const asciiSection = document.getElementById("asciiSection");
                 let picture = [];
@@ -37,52 +39,30 @@
                         let alpha = pixel[3+4*(x+100*y)];
                         let rgba = 'rgba('+red+','+green+','+blue+','+alpha+')';
 
-
                         let num = Math.floor(Math.random()*3);
                         let color = rgba;
                         let string;
                         switch (num) {
                             case 0:
-                                //color = "#FF0000";
-                                string = "█"; //●█⬤ ❶❷❸❹❺❻❼❽❾❿
+                                string = "▇▶"; // alternative chars: ● ▇ █ ⬤ ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿
                                 break;
                             case 1:
-                                //color = "#00FF00";
-                                string = "█";
+                                string = "▇▶";
                                 break;
                             case 2:
-                                //color = "#0000FF";
-                                string = "█";
+                                string = "▇▶";
                                 break;
                         }
                         let char = "<span style='color:" + color + "'>" + string + "</span>";
-                        line.unshift(char);
+                        line.push(char);
                     }
-                     picture.push(line.join("&nbsp")); //
+                     picture.push(line.join("")); //
                     picture.push("<br />");
                 }
-
                 asciiSection.innerHTML = picture.join("");
             }
         }
 
-
-        /*
-        function setImage() {
-
-        }
-        var imgData = img.getImageData(x, y, width, height).data;
-
-        function draw() {
-            //var image = document.getElementById("sourceImage");
-            for (let yPixel=0; yPixel<image.Width; yPixel++) {
-                for (let xPixel=0; xPixel<image.Height; xPixel++) {
-
-                }
-            }
-
-        }
-        */
     </script>
 
     <body>
@@ -90,8 +70,6 @@
         <div id="asciiSection"></div>
 
         <script>
-            //getImageData();
-            //draw();
             display();
         </script>
     </body>
