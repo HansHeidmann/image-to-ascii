@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Convert Image to ASCii</title>
+        <style>
+            body {
+                font-size: 5;
+            }
+        </style>
+    </head>
+
+    <script type="text/javascript">
+
+
+
+        function display() {
+            let imageCanvas = document.getElementById("tempCanvas");
+            let imageContext = imageCanvas.getContext("2d");
+
+            const asciiSection = document.getElementById("asciiSection");
+
+            let picture = [];
+
+            for(let i=0; i<100; i++) {
+                let line = [];
+                for(let j=0; j<100; j++) {
+                    let num = Math.floor(Math.random()*3);
+                    let color = 'red';
+                    switch (num) {
+                        case 0:
+                            color = "#FF0000";
+                            break;
+                        case 1:
+                            color = "#00FF00";
+                            break;
+                        case 2:
+                            color = "#0000FF";
+                            break;
+                    }
+                    let char = "<span style='color:" + color + "'>" + num + "</span>";
+                    line.unshift(char);
+                }
+                 picture.push(line.join("&nbsp&nbsp")); //
+                picture.push("<br />");
+            }
+
+            asciiSection.innerHTML = picture.join("");
+        }
+
+
+        /*
+        function setImage() {
+            let img = new Image();
+            img.src = "hans.png"; //document.getElementById("filePath")
+
+            img.onload = function() {
+
+                imageContext.drawImage(img, 0, 0);
+                img.display.style = "none";
+        }
+        var imgData = img.getImageData(x, y, width, height).data;
+
+        function draw() {
+            //var image = document.getElementById("sourceImage");
+            for (let yPixel=0; yPixel<image.Width; yPixel++) {
+                for (let xPixel=0; xPixel<image.Height; xPixel++) {
+
+                }
+            }
+
+        }
+        */
+    </script>
+
+    <body>
+        <div id="asciiSection"></div>
+        <canvas id="tempCanvas"></canvas>
+        <script>
+            //getImageData();
+            //draw();
+            display();
+        </script>
+    </body>
+</html>
